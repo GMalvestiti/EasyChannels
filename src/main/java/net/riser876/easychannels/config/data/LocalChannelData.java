@@ -1,5 +1,6 @@
 package net.riser876.easychannels.config.data;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import net.riser876.easychannels.config.adapters.LocalChannelFormatAdapter;
@@ -7,20 +8,45 @@ import net.riser876.easychannels.config.adapters.RadiusAdapter;
 
 public class LocalChannelData {
 
+    @Expose
     @SerializedName("enabled")
-    public boolean enabled = true;
+    private boolean enabled = true;
 
+    @Expose
     @SerializedName("radius")
     @JsonAdapter(RadiusAdapter.class)
-    public int radius = 50;
+    private int radius = 50;
 
+    @Expose
     @SerializedName("format")
     @JsonAdapter(LocalChannelFormatAdapter.class)
-    public String format;
+    private String format;
 
+    @Expose
     @SerializedName("permission_sender")
-    public PermissionData permissionSender = null;
+    private PermissionData permissionSender = null;
 
+    @Expose
     @SerializedName("permission_receiver")
-    public PermissionData permissionReceiver = null;
+    private PermissionData permissionReceiver = null;
+
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public int getRadius() {
+        return this.radius;
+    }
+
+    public String getFormat() {
+        return this.format;
+    }
+
+    public PermissionData getPermissionSender() {
+        return this.permissionSender;
+    }
+
+    public PermissionData getPermissionReceiver() {
+        return this.permissionReceiver;
+    }
 }

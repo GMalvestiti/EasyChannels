@@ -21,11 +21,11 @@ public class PermissionDataAdapter implements JsonDeserializer<PermissionData> {
 
         JsonElement permissionElement = jsonObject.get("permission");
         if (Objects.nonNull(permissionElement) && !permissionElement.isJsonNull()) {
-            permissionData.permission = permissionElement.getAsString();
+            permissionData.setPermission(permissionElement.getAsString());
         }
 
         JsonElement operatorLevelElement = jsonObject.get("operator_level");
-        permissionData.operatorLevel = this.getOperatorLevel(operatorLevelElement);
+        permissionData.setOperatorLevel(this.getOperatorLevel(operatorLevelElement));
 
         return permissionData;
     }

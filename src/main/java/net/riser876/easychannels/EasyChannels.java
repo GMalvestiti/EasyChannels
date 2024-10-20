@@ -12,14 +12,19 @@ public class EasyChannels implements ModInitializer {
 
     public static void loadModules() {
         if (!Config.isModEnabled()) {
-
+            EasyChannels.LOGGER.info("[EasyChannels] Mod is disabled. Skipping module loading.");
+            return;
         }
+
+        EasyChannels.LOGGER.info("[EasyChannels] Mod is enabled. Loading modules.");
+
+        EasyChannels.LOGGER.info("[EasyChannels] Mod initialized.");
     }
 
     @Override
     public void onInitialize() {
         Config.load();
-        EasyChannels.LOGGER.info("[EasyChannels] Configuration loaded");
+        EasyChannels.LOGGER.info("[EasyChannels] Configuration loaded.");
         EasyChannels.loadModules();
         Config.clear();
     }
