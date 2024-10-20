@@ -13,8 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Config {
-    public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("easychannels.json");
-    private static final Gson gson = new GsonBuilder()
+    public static Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("easychannels.json");
+    private static Gson gson = new GsonBuilder()
             .registerTypeAdapter(PermissionData.class, new PermissionDataAdapter())
             .setPrettyPrinting()
             .disableHtmlEscaping()
@@ -48,5 +48,15 @@ public class Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void clear() {
+        CONFIG_PATH = null;
+        gson = null;
+        configData = null;
+    }
+
+    public static boolean isModEnabled() {
+        return configData.enabled;
     }
 }

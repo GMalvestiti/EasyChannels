@@ -5,7 +5,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-
 import net.riser876.easychannels.config.data.PermissionData;
 import net.riser876.easychannels.enums.OperatorLevel;
 
@@ -21,7 +20,7 @@ public class PermissionDataAdapter implements JsonDeserializer<PermissionData> {
         PermissionData permissionData = new PermissionData();
 
         JsonElement permissionElement = jsonObject.get("permission");
-        if (permissionElement != null && !permissionElement.isJsonNull()) {
+        if (Objects.nonNull(permissionElement) && !permissionElement.isJsonNull()) {
             permissionData.permission = permissionElement.getAsString();
         }
 

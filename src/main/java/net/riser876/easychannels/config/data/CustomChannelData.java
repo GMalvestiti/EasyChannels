@@ -19,7 +19,7 @@ public class CustomChannelData {
 
     @SerializedName("radius")
     @JsonAdapter(RadiusAdapter.class)
-    public Integer radius = -1;
+    public int radius = -1;
 
     @SerializedName("dimension_only")
     public boolean dimensionOnly = false;

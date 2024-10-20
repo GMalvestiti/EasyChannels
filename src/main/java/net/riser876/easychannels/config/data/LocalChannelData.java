@@ -2,6 +2,7 @@ package net.riser876.easychannels.config.data;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import net.riser876.easychannels.config.adapters.LocalChannelFormatAdapter;
 import net.riser876.easychannels.config.adapters.RadiusAdapter;
 
 public class LocalChannelData {
@@ -14,7 +15,8 @@ public class LocalChannelData {
     public int radius = 50;
 
     @SerializedName("format")
-    public String format = "<white><bold>[L]</bold></white> <gold>${player}</gold> <gray>>></gray> <white>${message}";
+    @JsonAdapter(LocalChannelFormatAdapter.class)
+    public String format;
 
     @SerializedName("permission_sender")
     public PermissionData permissionSender = null;
