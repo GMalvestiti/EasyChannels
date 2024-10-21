@@ -6,7 +6,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class RadiusAdapter extends TypeAdapter<Integer> {
+public class LocalChannelRadiusAdapter extends TypeAdapter<Integer> {
 
     @Override
     public void write(JsonWriter out, Integer value) throws IOException {
@@ -16,6 +16,6 @@ public class RadiusAdapter extends TypeAdapter<Integer> {
     @Override
     public Integer read(JsonReader in) throws IOException {
         int radius = in.nextInt();
-        return radius < 0 ? -1 : radius;
+        return radius <= 0 ? 50 : radius;
     }
 }

@@ -20,7 +20,7 @@ public class LocalChannelManager {
 
     private static final int CHANNEL_RADIUS = Config.getLocalChannelData().getRadius();
     private static final String CHANNEL_FORMAT = Config.getLocalChannelData().getFormat();
-    private static final ChannelPermission CHANNEL_PERMISSION = Config.getLocalChannelData().getChannelPermission();
+    private static ChannelPermission CHANNEL_PERMISSION = Config.getLocalChannelData().getChannelPermission();
     private static Function<ServerPlayerEntity, Boolean> PERMISSION_CHECKER_SENDER = null;
     private static Function<ServerPlayerEntity, Boolean> PERMISSION_CHECKER_RECEIVER = null;
 
@@ -40,6 +40,8 @@ public class LocalChannelManager {
             consumer.accept(message, sender);
             return false;
         });
+
+        LocalChannelManager.clear();
 
         EasyChannels.LOGGER.info("[EasyChannels] Local channel manager loaded.");
     }
@@ -138,5 +140,9 @@ public class LocalChannelManager {
                 player.sendMessage(text);
             }
         }
+    }
+
+    private static void clear() {
+        CHANNEL_PERMISSION = null;
     }
 }

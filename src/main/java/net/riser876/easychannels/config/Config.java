@@ -19,6 +19,7 @@ public class Config {
     public static Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("easychannels.json");
     private static Gson gson = new GsonBuilder()
             .registerTypeAdapter(PermissionData.class, new PermissionDataAdapter())
+            .excludeFieldsWithoutExposeAnnotation()
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();

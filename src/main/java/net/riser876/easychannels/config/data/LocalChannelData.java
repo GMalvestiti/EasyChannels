@@ -3,13 +3,14 @@ package net.riser876.easychannels.config.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import net.riser876.easychannels.config.adapters.LocalChannelFormatAdapter;
-import net.riser876.easychannels.config.adapters.RadiusAdapter;
+import net.riser876.easychannels.config.adapters.LocalChannelRadiusAdapter;
 import net.riser876.easychannels.enums.ChannelPermission;
 
 import java.util.Objects;
 
 public class LocalChannelData {
+
+    private static final String DEFAULT_FORMAT = "<white><bold>[L]</bold></white> <gold>${player}</gold> <gray>>></gray> <white>${message}";
 
     @Expose
     @SerializedName("enabled")
@@ -17,13 +18,12 @@ public class LocalChannelData {
 
     @Expose
     @SerializedName("radius")
-    @JsonAdapter(RadiusAdapter.class)
+    @JsonAdapter(LocalChannelRadiusAdapter.class)
     private int radius = 50;
 
     @Expose
     @SerializedName("format")
-    @JsonAdapter(LocalChannelFormatAdapter.class)
-    private String format;
+    private String format = DEFAULT_FORMAT;
 
     @Expose
     @SerializedName("permission_sender")
@@ -42,6 +42,10 @@ public class LocalChannelData {
     }
 
     public String getFormat() {
+        if (Objects.isNull(this.format) || this.format.isBlank()) {
+            this.format = DEFAULT_FORMAT;
+        }
+
         return this.format;
     }
 

@@ -1,14 +1,15 @@
 package net.riser876.easychannels.config.data;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import net.riser876.easychannels.config.adapters.PermissionsRequiredMessageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigData {
+
+    private static final String DEFAULT_FORMAT = "<red>You don't have the required permissions to use this chat channel.";
 
     @Expose
     @SerializedName("enabled")
@@ -16,8 +17,7 @@ public class ConfigData {
 
     @Expose
     @SerializedName("permissions_required_message")
-    @JsonAdapter(PermissionsRequiredMessageAdapter.class)
-    private String permissionsRequiredMessage;
+    private String permissionsRequiredMessage = DEFAULT_FORMAT;
 
     @Expose
     @SerializedName("local_channel")
@@ -32,6 +32,10 @@ public class ConfigData {
     }
 
     public String getPermissionsRequiredMessage() {
+        if (Objects.isNull(this.permissionsRequiredMessage) || this.permissionsRequiredMessage.isBlank()) {
+            this.permissionsRequiredMessage = DEFAULT_FORMAT;
+        }
+
         return this.permissionsRequiredMessage;
     }
 
