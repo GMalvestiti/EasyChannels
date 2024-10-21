@@ -3,6 +3,7 @@ package net.riser876.easychannels.config.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import net.riser876.easychannels.enums.OperatorLevel;
+import net.riser876.easychannels.enums.PermissionType;
 
 public class PermissionData {
 
@@ -28,5 +29,9 @@ public class PermissionData {
 
     public void setOperatorLevel(int operatorLevel) {
         this.operatorLevel = operatorLevel;
+    }
+
+    public PermissionType getPermissionType() {
+        return PermissionType.resolve(this);
     }
 }

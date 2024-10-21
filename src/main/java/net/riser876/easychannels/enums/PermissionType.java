@@ -5,16 +5,11 @@ import net.riser876.easychannels.config.data.PermissionData;
 import java.util.Objects;
 
 public enum PermissionType {
-    NONE,
-    BOTH,
-    VANILLA;
+    VANILLA,
+    BOTH;
 
-    public PermissionType resolve(PermissionData permissionData) {
-        if (Objects.isNull(permissionData)) {
-            return NONE;
-        }
-
-        if (Objects.isNull(permissionData.permission) || permissionData.permission.isBlank()) {
+    public static PermissionType resolve(PermissionData permissionData) {
+        if (Objects.isNull(permissionData.getPermission()) || permissionData.getPermission().isBlank()) {
             return VANILLA;
         }
 
