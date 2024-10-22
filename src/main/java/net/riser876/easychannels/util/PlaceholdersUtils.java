@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 
 import java.util.Map;
 
-public class PlaceholderUtils {
+public class PlaceholdersUtils {
     private static final NodeParser PARSER = NodeParser.merge(TextParserV1.DEFAULT, Placeholders.DEFAULT_PLACEHOLDER_PARSER);
     private static final Text EMPTY_TEXT = Text.of("");
 

@@ -3,7 +3,7 @@ package net.riser876.easychannels.config.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import net.riser876.easychannels.config.adapters.CustomChannelRadiusAdapter;
+import net.riser876.easychannels.config.adapters.ChannelRadiusAdapter;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class CustomChannelData {
 
     @Expose
     @SerializedName("radius")
-    @JsonAdapter(CustomChannelRadiusAdapter.class)
+    @JsonAdapter(ChannelRadiusAdapter.class)
     private int radius = -1;
 
     @Expose

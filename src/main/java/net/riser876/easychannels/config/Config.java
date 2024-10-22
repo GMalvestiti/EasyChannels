@@ -75,4 +75,18 @@ public class Config {
     public static List<CustomChannelData> getCustomChannelData() {
         return configData.getCustomChannelData();
     }
+
+    public static boolean loadPlayerManager() {
+        if ((configData.getLocalChannelData().getRadius() <= 0) && (!configData.getLocalChannelData().isDimensionOnly())) {
+            return true;
+        }
+
+        for (CustomChannelData customChannelData : configData.getCustomChannelData()) {
+            if ((customChannelData.getRadius() <= 0) && (!customChannelData.isDimensionOnly())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

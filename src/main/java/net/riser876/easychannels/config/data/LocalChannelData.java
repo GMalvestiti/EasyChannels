@@ -3,8 +3,7 @@ package net.riser876.easychannels.config.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import net.riser876.easychannels.config.adapters.LocalChannelRadiusAdapter;
-import net.riser876.easychannels.enums.ChannelPermission;
+import net.riser876.easychannels.config.adapters.ChannelRadiusAdapter;
 
 import java.util.Objects;
 
@@ -18,8 +17,12 @@ public class LocalChannelData {
 
     @Expose
     @SerializedName("radius")
-    @JsonAdapter(LocalChannelRadiusAdapter.class)
+    @JsonAdapter(ChannelRadiusAdapter.class)
     private int radius = 50;
+
+    @Expose
+    @SerializedName("dimension_only")
+    private boolean dimensionOnly = true;
 
     @Expose
     @SerializedName("format")
@@ -41,6 +44,10 @@ public class LocalChannelData {
         return this.radius;
     }
 
+    public boolean isDimensionOnly() {
+        return this.dimensionOnly;
+    }
+
     public String getFormat() {
         if (Objects.isNull(this.format) || this.format.isBlank()) {
             this.format = DEFAULT_FORMAT;
@@ -55,21 +62,5 @@ public class LocalChannelData {
 
     public PermissionData getPermissionReceiver() {
         return this.permissionReceiver;
-    }
-
-    public ChannelPermission getChannelPermission() {
-        if (Objects.isNull(this.permissionSender) && Objects.isNull(this.permissionReceiver)) {
-            return ChannelPermission.NONE;
-        }
-
-        if (Objects.nonNull(this.permissionSender) && Objects.nonNull(this.permissionReceiver)) {
-            return ChannelPermission.BOTH;
-        }
-
-        if (Objects.nonNull(this.permissionSender)) {
-            return ChannelPermission.SENDER;
-        }
-
-        return ChannelPermission.RECEIVER;
     }
 }
