@@ -1,6 +1,5 @@
 package net.riser876.easychannels.core;
 
-import net.minecraft.network.message.SignedMessage;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Box;
@@ -23,7 +22,8 @@ public class Channel {
     public Function<ServerPlayerEntity, Boolean> PERMISSION_CHECKER_SENDER;
     public Function<ServerPlayerEntity, Boolean> PERMISSION_CHECKER_RECEIVER;
     public Function<ServerPlayerEntity, List<ServerPlayerEntity>> RECEIVER_SELECTOR;
-    public BiConsumer<SignedMessage, ServerPlayerEntity> MESSAGE_SENDER;
+    public BiConsumer<Text, ServerPlayerEntity> MESSAGE_SENDER;
+    public String CHANNEL_LITERAL;
 
     public Channel(Object channelData, ChannelType channelType) {
         switch (channelType) {
@@ -60,6 +60,8 @@ public class Channel {
         this.RECEIVER_SELECTOR = this.loadReceiverSelector(customChannelData.getRadius(), customChannelData.isDimensionOnly());
 
         this.MESSAGE_SENDER = this.getMessageSender(customChannelData.getFormat());
+
+        this.CHANNEL_LITERAL = customChannelData.getLiteral();
     }
 
     private void loadPermissionCheckers(PermissionData permissionSender, PermissionData permissionReceiver) {
@@ -104,7 +106,7 @@ public class Channel {
         return (ServerPlayerEntity sender) -> PlayerManagerUtils.PLAYER_MANAGER.getPlayerList();
     }
 
-    public BiConsumer<SignedMessage, ServerPlayerEntity> getMessageSender(String format) {
+    public BiConsumer<Text, ServerPlayerEntity> getMessageSender(String format) {
         return switch (this.CHANNEL_PERMISSION) {
             case BOTH -> (message, sender) -> {
                 if (!this.PERMISSION_CHECKER_SENDER.apply(sender)) {
@@ -112,7 +114,7 @@ public class Channel {
                     return;
                 }
 
-                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message.getContent());
+                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message);
 
                 for (ServerPlayerEntity player : this.RECEIVER_SELECTOR.apply(sender)) {
                     if (this.PERMISSION_CHECKER_RECEIVER.apply(player)) {
@@ -126,14 +128,14 @@ public class Channel {
                     return;
                 }
 
-                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message.getContent());
+                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message);
 
                 for (ServerPlayerEntity player : this.RECEIVER_SELECTOR.apply(sender)) {
                     player.sendMessage(text);
                 }
             };
             case RECEIVER -> (message, sender) -> {
-                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message.getContent());
+                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message);
 
                 for (ServerPlayerEntity player : this.RECEIVER_SELECTOR.apply(sender)) {
                     if (this.PERMISSION_CHECKER_RECEIVER.apply(player)) {
@@ -142,7 +144,7 @@ public class Channel {
                 }
             };
             default -> (message, sender) -> {
-                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message.getContent());
+                Text text = PlaceholdersUtils.formatPlayerMessage(format, sender, message);
 
                 for (ServerPlayerEntity player : this.RECEIVER_SELECTOR.apply(sender)) {
                     player.sendMessage(text);

@@ -54,14 +54,12 @@ public class Config {
         }
     }
 
-    public static void clear() {
-        CONFIG_PATH = null;
-        gson = null;
-        configData = null;
-    }
-
     public static boolean isModEnabled() {
         return configData.isModEnabled();
+    }
+
+    public static String getCommandArgumentName() {
+        return configData.getCommandArgumentName();
     }
 
     public static String getPermissionsRequiredMessage() {
@@ -73,7 +71,11 @@ public class Config {
     }
 
     public static List<CustomChannelData> getCustomChannelData() {
-        return configData.getCustomChannelData();
+        return configData.getCustomChannelData().stream().filter(CustomChannelData::isValid).toList();
+    }
+
+    public static List<CustomChannelData> getEnabledCustomChannelData() {
+        return Config.getCustomChannelData().stream().filter(CustomChannelData::isEnabled).toList();
     }
 
     public static boolean loadPlayerManager() {

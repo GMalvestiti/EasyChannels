@@ -10,10 +10,15 @@ import java.util.Objects;
 public class ConfigData {
 
     private static final String DEFAULT_FORMAT = "<red>You don't have the required permissions to use this chat channel.";
+    private static final String DEFAULT_COMMAND_ARGUMENT_NAME = "message";
 
     @Expose
     @SerializedName("enabled")
     private boolean enabled = true;
+
+    @Expose
+    @SerializedName("command_argument_name")
+    private String commandArgumentName = DEFAULT_COMMAND_ARGUMENT_NAME;
 
     @Expose
     @SerializedName("permissions_required_message")
@@ -29,6 +34,14 @@ public class ConfigData {
 
     public boolean isModEnabled() {
         return this.enabled;
+    }
+
+    public String getCommandArgumentName() {
+        if (Objects.isNull(this.commandArgumentName) || this.commandArgumentName.isBlank()) {
+            this.commandArgumentName = DEFAULT_COMMAND_ARGUMENT_NAME;
+        }
+
+        return this.commandArgumentName;
     }
 
     public String getPermissionsRequiredMessage() {

@@ -2,6 +2,7 @@ package net.riser876.easychannels;
 
 import net.fabricmc.api.ModInitializer;
 import net.riser876.easychannels.config.Config;
+import net.riser876.easychannels.core.CustomChannelManager;
 import net.riser876.easychannels.core.LocalChannelManager;
 import net.riser876.easychannels.util.PlayerManagerUtils;
 import org.slf4j.Logger;
@@ -17,7 +18,6 @@ public class EasyChannels implements ModInitializer {
         Config.load();
         EasyChannels.LOGGER.info("[EasyChannels] Configurations loaded.");
         EasyChannels.loadManagers();
-        Config.clear();
     }
 
     public static void loadManagers() {
@@ -31,6 +31,8 @@ public class EasyChannels implements ModInitializer {
         }
 
         LocalChannelManager.load();
+
+        CustomChannelManager.load();
 
         EasyChannels.LOGGER.info("[EasyChannels] Mod initialized successfully.");
     }

@@ -9,6 +9,9 @@ import java.util.Objects;
 
 public class CustomChannelData {
 
+    private static final String DEFAULT_FORMAT = "<gold>${player}</gold> <gray>>></gray> <yellow>${message}";
+    private static int counter = 0;
+
     @Expose
     @SerializedName("enabled")
     private boolean enabled = true;
@@ -38,10 +41,6 @@ public class CustomChannelData {
     @SerializedName("permission_receiver")
     private PermissionData permissionReceiver = null;
 
-    @Expose
-    @SerializedName("compare_metadata")
-    private String compareMetadata = null;
-
     public boolean isEnabled() {
         return this.enabled;
     }
@@ -51,10 +50,18 @@ public class CustomChannelData {
     }
 
     public String getLiteral() {
+        if (Objects.isNull(this.literal) || this.literal.isBlank()) {
+            this.literal = "channel" + CustomChannelData.counter++;
+        }
+
         return this.literal;
     }
 
     public String getFormat() {
+        if (Objects.isNull(this.format) || this.format.isBlank()) {
+            this.format = DEFAULT_FORMAT;
+        }
+
         return this.format;
     }
 
@@ -72,9 +79,5 @@ public class CustomChannelData {
 
     public PermissionData getPermissionReceiver() {
         return this.permissionReceiver;
-    }
-
-    public String getCompareMetadata() {
-        return this.compareMetadata;
     }
 }
