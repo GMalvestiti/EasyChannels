@@ -10,7 +10,7 @@ import java.util.Objects;
 public class CustomChannelData {
 
     private static final String DEFAULT_FORMAT = "<gold>${player}</gold> <gray>>></gray> <yellow>${message}";
-    private static int counter = 0;
+    private static int COUNTER = 1;
 
     @Expose
     @SerializedName("enabled")
@@ -18,11 +18,11 @@ public class CustomChannelData {
 
     @Expose
     @SerializedName("literal")
-    private String literal = null;
+    private String literal = "channel" + CustomChannelData.COUNTER++;
 
     @Expose
     @SerializedName("format")
-    private String format = null;
+    private String format = DEFAULT_FORMAT;
 
     @Expose
     @SerializedName("radius")
@@ -51,7 +51,7 @@ public class CustomChannelData {
 
     public String getLiteral() {
         if (Objects.isNull(this.literal) || this.literal.isBlank()) {
-            this.literal = "channel" + CustomChannelData.counter++;
+            this.literal = "channel" + CustomChannelData.COUNTER++;
         }
 
         return this.literal;

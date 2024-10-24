@@ -34,7 +34,7 @@ public class Config {
         try {
             String json = Files.readString(CONFIG_PATH);
             configData = gson.fromJson(json, ConfigData.class);
-            saveConfig();
+            Config.saveConfig();
         } catch (IOException | JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class Config {
 
     private static void loadDefaultConfig() {
         configData = new ConfigData();
-        saveConfig();
+        Config.saveConfig();
     }
 
     private static void saveConfig() {
