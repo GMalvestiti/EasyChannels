@@ -82,11 +82,11 @@ public class Channel {
         }
     }
 
-    private Function<ServerPlayerEntity, Boolean> createPermissionChecker(PermissionData permissionSender) {
+    private Function<ServerPlayerEntity, Boolean> createPermissionChecker(PermissionData permissionData) {
         return PermissionsUtils.createPermissionChecker(
-                permissionSender.getPermissionType(),
-                permissionSender.getOperatorLevel(),
-                permissionSender.getPermission()
+                permissionData.getPermissionType(),
+                permissionData.getOperatorLevel(),
+                permissionData.getPermission()
         );
     }
 
