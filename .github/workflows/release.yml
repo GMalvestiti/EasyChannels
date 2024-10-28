@@ -41,6 +41,6 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            build/libs/EasyChannels-v${{ inputs.version }}.jar
+            build/libs/EasyChannels-${{ inputs.version }}.jar
             LICENSE.txt
           fail_on_unmatched_files: true
