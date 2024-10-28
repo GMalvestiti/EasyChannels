@@ -7,7 +7,11 @@
   "authors": [
     "Riser876"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://modrinth.com/user/Riser876",
+    "sources": "https://github.com/GMalvestiti/EasyChannels",
+    "issues": "https://github.com/GMalvestiti/EasyChannels/issues"
+  },
   "license": "Apache-2.0",
   "icon": "assets/easychannels/icon.png",
   "environment": "server",
@@ -18,7 +22,12 @@
   },
   "depends": {
     "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "luckperms": "*",
+    "styledchat": "*"
   }
 }

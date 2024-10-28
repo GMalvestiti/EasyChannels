@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version of the release"
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: List contents of build/libs
+        run: |
+          ls -al build/libs
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: "Release v${{ inputs.version || github.ref }}"
+          body: "Automatic release of version ${{ inputs.version || github.ref }}"
+          draft: true
+          prerelease: false
+          files: |
+            build/libs/EasyChannels-v${{ inputs.version }}.jar
+            LICENSE.txt
+          fail_on_unmatched_files: true
