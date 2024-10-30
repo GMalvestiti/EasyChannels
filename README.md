@@ -21,7 +21,7 @@
       </li>
       <li><a href="https://modrinth.com/plugin/luckperms">LuckPerms</a>
         <ul>
-          <li>If you want to use LuckPerms and Styled Chat, you'll need to install the LuckPerms Placeholder API Hook mod.</li>
+          <li>If you want to use LuckPerms and the Placeholder API, you'll need to install the LuckPerms Placeholder API Hook mod.</li>
             <ul>
               <li><a href="https://luckperms.net/download">Offical Download</a> for the latest minecraft version.</li>
               <li><a href="https://github.com/GMalvestiti/placeholders">EasyChannels Fork</a> for 1.20.1 only</li>
